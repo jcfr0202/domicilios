@@ -1,11 +1,10 @@
-package com.test.domicilios.model
+package com.test.domicilios.domain
 
 import com.test.domicilios.exception.CustomException
 import java.lang.IllegalArgumentException
 
 sealed class Movement {
 
-    abstract fun orientation(): Orientation
     abstract fun move(position: Position): Position
 
     companion object {
@@ -19,24 +18,20 @@ sealed class Movement {
     }
 
     sealed class Rotation : Movement() {
-
         object LeftWard : Rotation() {
-            override fun orientation() = Orientation(-1)
             override fun move(position: Position): Position = position.run {
-                copy(direction = direction.nextDirection.invoke(orientation()))
+                copy(direction = direction.nextDirection.invoke(Orientation(-1)))
             }
         }
 
         object RightWard : Rotation() {
-            override fun orientation() = Orientation(1)
             override fun move(position: Position): Position = position.run {
-                copy(direction = direction.nextDirection.invoke(orientation()))
+                copy(direction = direction.nextDirection.invoke(Orientation(1)))
             }
         }
     }
 
     object Forward : Movement() {
-        override fun orientation() = Orientation(0)
         override fun move(position: Position) = position.run {
             when(direction) {
                 is Direction.Horizontal -> copy(coordinateX = coordinateX + direction.movementOverAxis())
@@ -49,8 +44,8 @@ sealed class Movement {
 // Value Object
 data class Orientation(val value: Int) {
     init {
-        if (value > 1 || value < -1) {
-            throw IllegalArgumentException("orientation value is not a number between 1 and -1. Value: $value")
+        if (value != 1 && value != -1) {
+            throw IllegalArgumentException("Orientation value must be either 1 or -1. Value: $value")
         }
     }
 }

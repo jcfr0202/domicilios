@@ -1,4 +1,4 @@
-package com.test.domicilios.model
+package com.test.domicilios.domain
 
 sealed class Direction {
 

@@ -1,16 +1,15 @@
-package com.test.domicilios
+package com.test.domicilios.application
 
 import com.test.domicilios.dto.Route
 import com.test.domicilios.exception.CustomException
-import com.test.domicilios.model.Direction
-import com.test.domicilios.model.Position
-import com.test.domicilios.service.RouteServiceImpl
+import com.test.domicilios.domain.Direction
+import com.test.domicilios.domain.Position
 import org.hamcrest.CoreMatchers.equalTo
 import org.hamcrest.MatcherAssert.assertThat
+import org.hamcrest.CoreMatchers.`is` as Is
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.Test
-import org.hamcrest.CoreMatchers.`is` as Is
 
 internal class RouterServiceImpl {
 

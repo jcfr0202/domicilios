@@ -11,6 +11,7 @@ val hamcrestVersion: String by project
 val kotlinLoggingVersion: String by project
 val logbackVersion: String by project
 val slf4jKotlinCoroutinesVersion: String by project
+val stringUtilsVersion: String by project
 
 plugins {
     kotlin("jvm") version "1.3.70"
@@ -61,5 +62,6 @@ allprojects {
         testImplementation("org.junit.jupiter:junit-jupiter-api:$jUnitVersion")
         testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:$jUnitVersion")
         testImplementation("org.hamcrest:hamcrest-core:$hamcrestVersion")
+        testImplementation("org.apache.commons:commons-lang3:$stringUtilsVersion")
     }
 }

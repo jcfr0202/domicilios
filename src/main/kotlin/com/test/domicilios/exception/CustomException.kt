@@ -6,8 +6,8 @@ class CustomException internal constructor(msg: String?) : RuntimeException(msg)
             return CustomException("Cannot register a null consumer.")
         }
 
-        fun invalidMovementInitial(initial: Char, initialsList: String): CustomException {
-            return CustomException("'$initial' does not belong to any move. Valid movements are: $initialsList.")
+        fun invalidMovementInitial(initial: Char): CustomException {
+            return CustomException("Movement with initial='$initial' has not been recognized")
         }
 
         fun invalidCardinalPoint(number: Int, length: Int): CustomException {

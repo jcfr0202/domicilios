@@ -22,9 +22,9 @@ class CustomException internal constructor(msg: String?) : RuntimeException(msg)
             return CustomException("Drone is not capable of going further than $maxForwardMovements blocks around.")
         }
 
-        fun invalidNumberOfDeliveries(capacityOfDeliveries: Int, actualNumOfDeliveries: Int): CustomException {
-            return CustomException("Drone is not capable of deliver more than " + capacityOfDeliveries + " deliveries per route. " +
-                "Actual number of deliveries: " + actualNumOfDeliveries)
+        fun invalidNumberOfDeliveries(capacityOfDeliveries: Int): CustomException {
+            return CustomException("Drone capacity specified (capacity=$capacityOfDeliveries) is not the same as the " +
+                "number of routes specified in the input file")
         }
     }
 }

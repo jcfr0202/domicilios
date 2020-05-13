@@ -12,7 +12,7 @@ import org.junit.jupiter.api.assertThrows
 import java.lang.IllegalArgumentException
 import java.util.stream.Stream
 
-internal class RouteTest {
+internal class DeliveryRouteTest {
 
     @TestFactory
     fun `success scenarios`(): Stream<DynamicTest> =
@@ -22,7 +22,7 @@ internal class RouteTest {
                 "aaidaiiia"
             )
             .map { input ->
-                dynamicTest("Accepted: $input") { assertDoesNotThrow { Route.createNew(input) } }
+                dynamicTest("Accepted: $input") { assertDoesNotThrow { DeliveryRoute.createNew(input) } }
             }
 
     @TestFactory
@@ -35,7 +35,7 @@ internal class RouteTest {
             .map { input ->
                 dynamicTest("Rejected: $input") {
                     val expectedMessage = "Route only accepts the following alphabetic characters: [A, D, I]. Route: '$input'"
-                    assertThrows<IllegalArgumentException> { Route.createNew(input) }
+                    assertThrows<IllegalArgumentException> { DeliveryRoute.createNew(input) }
                         .also { actualException ->
                             assertThat(actualException.message, Is(equalTo(expectedMessage)))
                         }
@@ -54,7 +54,7 @@ internal class RouteTest {
             .map { input ->
                 dynamicTest("Rejected: $input") {
                     val expectedMessage = "Route string must have between 5 and 200 characters. Route: '$input'"
-                    assertThrows<IllegalArgumentException> { Route.createNew(input) }
+                    assertThrows<IllegalArgumentException> { DeliveryRoute.createNew(input) }
                         .also { actualException ->
                             assertThat(actualException.message, Is(equalTo(expectedMessage)))
                         }

@@ -3,14 +3,10 @@ import org.gradle.api.tasks.testing.logging.TestLogEvent
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 val kotlinVersion: String by project
-val kotlinCoroutinesVersion: String by project
-val jacksonVersion: String by project
 val jUnitVersion: String by project
-val mockitoVersion: String by project
 val hamcrestVersion: String by project
 val kotlinLoggingVersion: String by project
 val logbackVersion: String by project
-val slf4jKotlinCoroutinesVersion: String by project
 val stringUtilsVersion: String by project
 
 plugins {
@@ -49,10 +45,6 @@ allprojects {
         // Kotlin
         implementation(kotlin(module = "stdlib-jdk8", version = kotlinVersion))
         implementation(kotlin(module = "reflect", version = kotlinVersion))
-
-        // Jackson
-        implementation("com.fasterxml.jackson.core:jackson-databind:$jacksonVersion")
-        implementation("com.fasterxml.jackson.module:jackson-module-kotlin:$jacksonVersion")
 
         // Logging
         implementation("io.github.microutils:kotlin-logging:$kotlinLoggingVersion")

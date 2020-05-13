@@ -1,17 +1,29 @@
 package com.test.domicilios.application
 
-import com.test.domicilios.dto.Route
+import com.test.domicilios.domain.Drone
 import com.test.domicilios.domain.Position
+import com.test.domicilios.dto.DeliveryRoute
 
-interface RouteService {
-    fun followPath(route: Route, position: Position): List<Position>
+interface RouterService {
+    suspend fun launchDrone(routesFilePath: String, droneCapacity: Int, initialPosition: Position): List<Position>
 }
 
-object RouteServiceImpl : RouteService {
+object RouterServiceImpl : RouterService {
 
-    override fun followPath(route: Route, position: Position): List<Position> {
+    override suspend fun launchDrone(routesFilePath: String, droneCapacity: Int, initialPosition: Position): List<Position> {
+        val deliveryInfo: MutableList<Position> = mutableListOf()
+        Drone(routesFilePath, droneCapacity)
+            .deliveryRoutes
+            .fold(initialPosition) { route, pos ->
+                followDeliveryRoute(pos, route).last()
+                    .also { deliveryPosition -> deliveryInfo.add(deliveryPosition) }
+            }
+        return deliveryInfo
+    }
+
+    private fun followDeliveryRoute(deliveryRoute: DeliveryRoute, position: Position): List<Position> {
         val trace: MutableList<Position> = mutableListOf()
-        route.toEntity().fold(position) { currentPosition, movement ->
+        deliveryRoute.toEntity().fold(position) { currentPosition, movement ->
             currentPosition
                 .merge(nextPosition = movement.move(position = Position(0, 0, currentPosition.direction)))
                 .also { trace.add(it) }

@@ -5,12 +5,12 @@ import com.test.domicilios.domain.Position
 import com.test.domicilios.dto.DeliveryRoute
 
 interface RouterService {
-    suspend fun launchDrone(routesFilePath: String, droneCapacity: Int, initialPosition: Position): List<Position>
+    fun launchDrone(routesFilePath: String, droneCapacity: Int, initialPosition: Position): List<Position>
 }
 
 object RouterServiceImpl : RouterService {
 
-    override suspend fun launchDrone(routesFilePath: String, droneCapacity: Int, initialPosition: Position): List<Position> {
+    override fun launchDrone(routesFilePath: String, droneCapacity: Int, initialPosition: Position): List<Position> {
         val deliveryInfo: MutableList<Position> = mutableListOf()
         Drone(routesFilePath, droneCapacity)
             .deliveryRoutes

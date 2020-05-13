@@ -3,7 +3,6 @@ package com.test.domicilios.application
 import com.test.domicilios.exception.CustomException
 import com.test.domicilios.domain.Direction
 import com.test.domicilios.domain.Position
-import kotlinx.coroutines.runBlocking
 import org.hamcrest.CoreMatchers.equalTo
 import org.hamcrest.MatcherAssert.assertThat
 import org.hamcrest.CoreMatchers.`is` as Is
@@ -20,7 +19,7 @@ internal class RouterServiceImplTest {
     inner class SuccessScenarios {
 
         @Test
-        fun `drone delivers 3 packages successfully`() = runBlocking {
+        fun `drone delivers 3 packages successfully`() {
             val routesFilePath = File("$deliveryRoutesFilesPath/in01.txt").absolutePath
             val droneCapacity = 3
             val initialPosition = Position(0, 0, Direction.Vertical.North)
@@ -47,9 +46,7 @@ internal class RouterServiceImplTest {
             val initialPosition = Position(0, 0, Direction.Vertical.North)
 
             val actualException = Assertions.assertThrows(CustomException::class.java) {
-                runBlocking {
-                    RouterServiceImpl.launchDrone(routesFilePath, droneCapacity, initialPosition)
-                }
+                RouterServiceImpl.launchDrone(routesFilePath, droneCapacity, initialPosition)
             }
             assertThat(actualException.message,
                 Is(equalTo("Drone is not capable of going further than 10 blocks around.")))

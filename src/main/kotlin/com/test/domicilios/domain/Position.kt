@@ -21,4 +21,6 @@ data class Position(
         }
         return this.copy(coordinateX = newCoordinateX, coordinateY = newCoordinateY, direction = nextPosition.direction)
     }
+
+    override fun toString() = "($coordinateX, $coordinateY) dirección $direction"
 }

@@ -8,6 +8,7 @@ val hamcrestVersion: String by project
 val kotlinLoggingVersion: String by project
 val logbackVersion: String by project
 val stringUtilsVersion: String by project
+val commonsIOVersion: String by project
 
 plugins {
     kotlin("jvm") version "1.3.70"
@@ -45,6 +46,9 @@ allprojects {
         // Kotlin
         implementation(kotlin(module = "stdlib-jdk8", version = kotlinVersion))
         implementation(kotlin(module = "reflect", version = kotlinVersion))
+
+        // Util
+        implementation("commons-io:commons-io:$commonsIOVersion")
 
         // Logging
         implementation("io.github.microutils:kotlin-logging:$kotlinLoggingVersion")
